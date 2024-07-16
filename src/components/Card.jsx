@@ -1,6 +1,7 @@
 import React from "react";
 import { posts } from "../data/posts";
 import { format } from "date-fns";
+import { Link } from "react-router-dom";
 
 const Card = () => {
   const dateFormat = (date) => {
@@ -10,9 +11,10 @@ const Card = () => {
     <div className="mt-8">
       {posts.map((item) => {
         return (
-          <div
+          <Link
+            to={`/posts/${item.id}`}
             key={item.id}
-            className="w-3/4 mx-auto border border-gray-300 p-4 mb-6 rounded-lg "
+            className="w-3/4 mx-auto border border-gray-300 p-4 mb-6 rounded-lg block"
           >
             <div className="flex justify-between">
               <p>{dateFormat(item.createdAt)}</p>
@@ -26,7 +28,7 @@ const Card = () => {
             </div>
             <h2 className="text-2xl font-bold my-4">{item.title}</h2>
             <p className="w-3/4 line-clamp-2">{item.content}</p>
-          </div>
+          </Link>
         );
       })}
     </div>
