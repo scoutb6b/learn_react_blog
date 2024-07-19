@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { posts } from "../data/posts";
 import { format } from "date-fns";
 
 const PostPage = () => {
   const { id } = useParams();
+  const [post, setPost] = useState(null);
   const dateFormat = (date) => {
     return format(new Date(date), "yyyy-MM-dd");
   };
-  const { thumbnailUrl, createdAt, categories, title, content } = posts[id - 1];
+  useEffect(() => {
+    const getPost = async () => {
+      const res = await fetch(
+        `https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts/${id}`
+      );
+      const data = await res.json();
+      console.log(data.post);
+      setPost(data.post);
+    };
+    getPost();
+  }, []);
+  if (post === null) {
+    return <div>loading...</div>;
+  }
+  const { thumbnailUrl, createdAt, categories, title, content } = post;
   return (
     <div className="mx-auto w-3/4">
       <img className="mx-auto" src={thumbnailUrl} alt="" />

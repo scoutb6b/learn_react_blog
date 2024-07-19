@@ -1,5 +1,4 @@
-import React from "react";
-import { posts } from "../data/posts";
+import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 
@@ -7,6 +6,20 @@ const Card = () => {
   const dateFormat = (date) => {
     return format(new Date(date), "yyyy-MM-dd");
   };
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const getAllPosts = async () => {
+      const res = await fetch(
+        "https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts"
+      );
+      const data = await res.json();
+      setPosts(data.posts);
+    };
+
+    getAllPosts();
+  }, []);
+
   return (
     <div className="mt-8">
       {posts.map((item) => {
