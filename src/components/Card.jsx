@@ -25,7 +25,10 @@ const Card = () => {
               </div>
             </div>
             <h2 className="text-2xl font-bold my-4">{item.title}</h2>
-            <p className="w-3/4 line-clamp-2">{item.content}</p>
+            <p
+              className="w-3/4 line-clamp-2"
+              dangerouslySetInnerHTML={{ __html: item.content }}
+            ></p>
           </div>
         );
       })}
