@@ -38,7 +38,10 @@ const PostPage = () => {
           </div>
         </div>
         <div className="text-2xl font-semibold mt-5">{title}</div>
-        <div className="mt-5">{content}</div>
+        <div
+          className="mt-5"
+          dangerouslySetInnerHTML={{ __html: content }}
+        ></div>
       </div>
     </div>
   );
