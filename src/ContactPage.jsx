@@ -10,18 +10,23 @@ const ContactPage = () => {
   } = useForm();
 
   const submit = async (data) => {
-    const res = await fetch(
-      "https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/contacts",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
-    window.alert("送信しました");
-    reset();
+    try {
+      const res = await fetch(
+        "https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/contacts",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      window.alert("送信しました");
+      reset();
+    } catch (error) {
+      window.alert("送信に失敗しました");
+      console.error(error);
+    }
   };
 
   return (
@@ -91,7 +96,6 @@ const ContactPage = () => {
           <div className="flex gap-4 justify-center mt-8">
             <button
               type="submit"
-              onClick={handleSubmit}
               className="border px-8 py-2 rounded-lg bg-slate-600 text-white font-semibold "
               disabled={isSubmitting}
             >

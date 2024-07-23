@@ -40,10 +40,10 @@ const Card = () => {
               </div>
             </div>
             <h2 className="text-2xl font-bold my-4">{item.title}</h2>
-            <p
+            <div
               className="w-3/4 line-clamp-2"
               dangerouslySetInnerHTML={{ __html: item.content }}
-            ></p>
+            ></div>
           </Link>
         );
       })}
